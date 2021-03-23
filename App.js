@@ -11,22 +11,23 @@ const Tab = createBottomTabNavigator()
 
 import Home from './Screens/Home';
 import Detail from './Screens/Detail'
+import Favorite from './Screens/Favorite'
 
 export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName="Food"
-        tabBarOptions={{
-          activeTintColor: "#841548"
-        }}
+      initialRouteName="Food"
+      tabBarOptions={{
+        activeTintColor: "#841548"
+      }}
       >
         <Tab.Screen 
           name="Home"
           component={HomeStack}
           options={{
             tabBarLabel: "Home",
-            tabBarIcon: ({color, size}) => (
+            tabBarIcon:({color, size}) =>(
               <MaterialCommunityIcons 
                 name="home"
                 color={color}
@@ -34,35 +35,72 @@ export default function App() {
               />
             )
           }}
-        />
+       />
+
+        <Tab.Screen  
+          name="Favorite"
+          component={FavoriteStack}
+          options={{
+            tabBarLabel: "Favorite",
+            tabBarIcon:({color, size}) =>(
+              <MaterialCommunityIcons 
+                name="heart"
+                color={color}
+                size={size}
+              />
+            )
+          }}
+       />
       </Tab.Navigator>
     </NavigationContainer>
   );
 }
-
-function  HomeStack() {
-  return(
-    <Stack.Navigator 
-    initialRouteName="Home"
-    screenOptions={{
-      headerStyle: {backgroundColor: "#841548"},
-      headerTintColor: "#fff",
-      headerTitleStyle: {fontWeight: "bold"}
-    }}
-    >
+function HomeStack(){
+ return(
+  <Stack.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerStyle: {backgroundColor: "#841548"},
+        headerTintColor: "#fff",
+        headerTitleStyle: {fontWeight: "bold"}
+      }}
+      
+      >
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{title: "Home Page"}}
+    
+    />
       <Stack.Screen 
-        name="Home"
-        component={Home}
-        options={{title: "Home Page"}}
+      name="Detail"
+      component={Detail}
+      
       />
-      <Stack.Screen 
-        name="Detail"
-        component={Detail}
-      />
-  
-    </Stack.Navigator>
-  )
+ </Stack.Navigator>
+ )
 }
+function FavoriteStack(){
+  return(
+   <Stack.Navigator
+       initialRouteName="Favorite"
+       screenOptions={{
+         headerStyle: {backgroundColor: "#841548"},
+         headerTintColor: "#fff",
+         headerTitleStyle: {fontWeight: "bold"}
+       }}
+       
+       >
+         <Stack.Screen
+           name="Favorite"
+           component={Favorite}
+           options={{title: "Favorite Page"}}
+     
+     />
+      
+  </Stack.Navigator>
+  )
+ }
 
 const styles = StyleSheet.create({
 
